@@ -15,7 +15,7 @@ module Danger
   # ```
   # ### Token Setup
   #
-  # Add the `DANGER_GITHUB_API_TOKEN` to your pipeline env variables.
+  # Add the `DANGER_GITLAB_API_TOKEN` to your pipeline env variables.
   class GitLabCI < CI
     def self.validates_as_ci?(env)
       env.key? "GITLAB_CI"
@@ -38,8 +38,8 @@ module Danger
       client = RequestSources::GitLab.new(nil, env).client
 
       merge_requests = client.merge_requests(project_id, state: :opened)
-      merge_request = merge_requests.auto_paginate.bsearch do |mr|
-        mr.sha >= base_commit
+      merge_request = merge_requests.auto_paginate.find do |mr|
+        mr.sha == base_commit
       end
 
       merge_request.nil? ? 0 : merge_request.iid

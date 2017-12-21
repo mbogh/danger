@@ -58,8 +58,12 @@ module Danger
       end
 
       def base_commit
-        first_commit_in_branch = self.commits_json.last.id
-        @base_commit ||= self.scm.exec "rev-parse #{first_commit_in_branch}^1"
+        if self.commits_json.last
+          first_commit_in_branch = self.commits_json.last.id
+          @base_commit ||= self.scm.exec "rev-parse #{first_commit_in_branch}^1"
+        else
+          @base_commit = ""
+        end
       end
 
       def mr_comments
@@ -78,15 +82,18 @@ module Danger
       end
 
       def setup_danger_branches
+        raise "Are you running `danger local/pr` against the correct repository? Also this can happen if you run danger on MR without changes" if base_commit.empty?
+        base_branch = self.mr_json.source_branch
+        head_branch = self.mr_json.target_branch
         head_commit = self.scm.head_commit
 
         # Next, we want to ensure that we have a version of the current branch at a known location
-        scm.ensure_commitish_exists! base_commit
+        scm.ensure_commitish_exists_on_branch! base_branch, base_commit
         self.scm.exec "branch #{EnvironmentManager.danger_base_branch} #{base_commit}"
 
         # OK, so we want to ensure that we have a known head branch, this will always represent
         # the head of the PR ( e.g. the most recent commit that will be merged. )
-        scm.ensure_commitish_exists! head_commit
+        scm.ensure_commitish_exists_on_branch! head_branch, head_commit
         self.scm.exec "branch #{EnvironmentManager.danger_head_branch} #{head_commit}"
       end
 
