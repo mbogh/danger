@@ -1,7 +1,74 @@
+<!--
+
+// Please add your own contribution below inside the Master section, no need to
+// set a version number, that happens during a deploy.
+//
+// These docs are aimed at users rather than danger developers, so please limit technical
+// terminology in here.
+
+-->
+
 ## master
 
-> _Add your own contributions to the next release on a new line above this; please include your name too._
-> _Please don't set a new version if you are the first to make the section for `master`._
+* Fix to detect not Pull Request on CircleCI. [@kompiro](https://github.com/kompiro)
+
+## 5.6.2
+
+* Update Screwdriver CI to parse repo_slug/repo_url correctly. [@fandyfyf](https://github.com/fandyfyf) 
+
+## 5.6.1
+
+* Use HTTPS links where applicable. [@allewun](https://github.com/allewun)
+* Fix `Danger::GitLabCI` to use `CI_PROJECT_PATH` instead of `CI_PROJECT_ID` for its `#repo_slug`. [@rymai](https://github.com/rymai)
+
+## 5.6.0
+
+* Fix CircleCI API failing to detect PRs. [@allewun](https://github.com/allewun)
+* Fix crash when messages are nil. [@allewun](https://github.com/allewun)
+* Add support for [Screwdriver CI](http://screwdriver.cd) - [@dbgrandi](https://github.com/dbgrandi)
+
+## 5.5.13
+
+* Enable Bitbucket Cloud for Bitrise CI [@masahide318](https://github.com/masahide318)
+* Notes which CI is used when exiting with an invalid PR [@dbgrandi](https://github.com/dbgrandi)
+
+## 5.5.12
+
+* Fix a multistage `import_dangerfile` error [@tbrand](https://github.com/tbrand)
+* Fixing typo: `ArraySublcass` -> `ArraySubclass` [@ivantse](https://github.com/ivantse)
+* Fix crash when having messages with nil line on GitHub [@fwal](https://github.com/fwal)
+
+## 5.5.11
+
+* Fix GitLab `html_link` url's for external repos. [@sogame](https://github.com/sogame)
+* Removing `--all` option for `git merge-base` [@tbrand](https://github.com/tbrand)
+
+## 5.5.10
+
+* Improve Jenkins CI error handling when no ENV passed in - #954 Juanito Fatas
+* Update rubocop and yard dependencies for vulnerabilities - #955 #957 Juanito Fatas
+* Enable BitBucket Cloud for Circle CI. [@andrewlord1990](https://github.com/andrewlord1990)
+
+## 5.5.9
+
+* Fix handling of Github repo slugs with dots in them (for Bitrise CI). [@provTheodoreNewell](https://github.com/provTheodoreNewell)
+
+## 5.5.8
+
+* Add `--remove-previous-comments` functionality, which means that a you can make a new comment
+  at the bottom of the code review conversation. [@JoeS](https://github.com/joesss)
+
+## 5.5.7
+
+* Add Bitbucket Server support for Bitrise CI. [@copini](https://github.com/copini)
+* Add Bitbucket Server support for TeamCity CI. [@davevdveen](https://github.com/davevdveen)
+* Use unique entries for the validation reports
+* Add Bitbucket Cloud support for TeamCity [@neilkimmett](https://github.com/neilkimmett)
+
+## 5.5.6
+
+* Improves the inline docs on `danger local` and `danger pr`. [@orta](https://github.com/orta)
+* Improves the GitLab CI error handling if port number is accidentally included in host. [@mbogh](https://github.com/mbogh)
 
 ## 5.5.5
 

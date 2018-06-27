@@ -20,8 +20,7 @@ module Danger
         self.ci_source = ci_source
         self.environment = environment
 
-        project, slug = ci_source.repo_slug.split("/")
-        @api = BitbucketCloudAPI.new(project, slug, ci_source.pull_request_id, environment)
+        @api = BitbucketCloudAPI.new(ci_source.repo_slug, ci_source.pull_request_id, nil, environment)
       end
 
       def validates_as_ci?
@@ -65,8 +64,8 @@ module Danger
         nil
       end
 
-      def update_pull_request!(warnings: [], errors: [], messages: [], markdowns: [], danger_id: "danger", new_comment: false)
-        delete_old_comments(danger_id: danger_id) unless new_comment
+      def update_pull_request!(warnings: [], errors: [], messages: [], markdowns: [], danger_id: "danger", new_comment: false, remove_previous_comments: false)
+        delete_old_comments(danger_id: danger_id) if !new_comment || remove_previous_comments
 
         comment = generate_description(warnings: warnings, errors: errors)
         comment += "\n\n"

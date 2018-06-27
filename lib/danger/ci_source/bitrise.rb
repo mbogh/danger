@@ -29,14 +29,19 @@ module Danger
     end
 
     def supported_request_sources
-      @supported_request_sources ||= [Danger::RequestSources::GitHub, Danger::RequestSources::GitLab]
+      @supported_request_sources ||= [
+        Danger::RequestSources::GitHub,
+        Danger::RequestSources::GitLab,
+        Danger::RequestSources::BitbucketServer,
+        Danger::RequestSources::BitbucketCloud
+      ]
     end
 
     def initialize(env)
       self.pull_request_id = env["BITRISE_PULL_REQUEST"]
       self.repo_url = env["GIT_REPOSITORY_URL"]
 
-      repo_matches = self.repo_url.match(%r{([\/:])([^\/]+\/[^\/.]+)(?:.git)?$})
+      repo_matches = self.repo_url.match(%r{([\/:])([^\/]+\/[^\/]+?)(\.git$|$)})
       self.repo_slug = repo_matches[2] unless repo_matches.nil?
     end
   end

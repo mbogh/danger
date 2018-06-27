@@ -30,7 +30,7 @@ module Danger
         system_env = {
           "CIRCLE_BUILD_NUM" => "1589",
           "CI_PULL_REQUEST" => "https://circleci.com/gh/danger/danger/1589",
-          "CIRCLE_CI_API_TOKEN" => "circle api token",
+          "DANGER_CIRCLE_CI_API_TOKEN" => "circle api token",
           "CIRCLE_PROJECT_USERNAME" => "danger",
           "CIRCLE_PROJECT_REPONAME" => "danger"
         }
@@ -52,7 +52,7 @@ module Danger
         system_env = {
           "GITLAB_CI" => "true",
           "CI_MERGE_REQUEST_ID" => "42",
-          "CI_PROJECT_ID" => "danger/danger"
+          "CI_PROJECT_PATH" => "danger/danger"
         }
 
         yield(system_env)
@@ -88,6 +88,16 @@ module Danger
       def with_localgitrepo_setup
         system_env = {
           "DANGER_USE_LOCAL_GIT" => "true"
+        }
+
+        yield(system_env)
+      end
+
+      def with_screwdriver_setup_and_is_a_pull_request
+        system_env = {
+          "SCREWDRIVER" => "true",
+          "SD_PULL_REQUEST" => "42",
+          "SCM_URL" => "git@github.com:danger/danger"
         }
 
         yield(system_env)
