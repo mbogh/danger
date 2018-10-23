@@ -14,7 +14,7 @@ module Danger
   #
   # @example Ensure that labels have been applied to the MR.
   #
-  #          fail "Please add labels to this MR" if gitlab.mr_labels.empty?
+  #          failure "Please add labels to this MR" if gitlab.mr_labels.empty?
   #
   # @example Ensure that all MRs have an assignee.
   #
@@ -22,11 +22,11 @@ module Danger
   #
   # @example Ensure there is a summary for a MR.
   #
-  #          fail "Please provide a summary in the Merge Request description" if gitlab.mr_body.length < 5
+  #          failure "Please provide a summary in the Merge Request description" if gitlab.mr_body.length < 5
   #
   # @example Only accept MRs to the develop branch.
   #
-  #          fail "Please re-submit this MR to develop, we may have already fixed your issue." if gitlab.branch_for_merge != "develop"
+  #          failure "Please re-submit this MR to develop, we may have already fixed your issue." if gitlab.branch_for_merge != "develop"
   #
   # @example Note when MRs don't reference a milestone, make the warning stick around on subsequent runs
   #
@@ -148,7 +148,7 @@ module Danger
     # @return [String]
     #
     def base_commit
-      @gitlab.base_commit
+      @gitlab.mr_json.diff_refs.base_sha
     end
 
     # @!group MR Commit Metadata
@@ -156,7 +156,7 @@ module Danger
     # @return [String]
     #
     def head_commit
-      @gitlab.commits_json.first.id
+      @gitlab.mr_json.diff_refs.head_sha
     end
 
     # @!group GitLab Misc

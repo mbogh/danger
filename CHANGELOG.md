@@ -10,11 +10,36 @@
 
 ## master
 
+## 5.7.0
+
+* Fixes importing a Dangerfile from a GitLab repository [@koffeinfrei](https://github.com/koffeinfrei/)
+* Adds `dry_run` command to allow running danger on localhost without actual PR/MR [@otaznik-net](https://github.com/otaznik-net)
+* GitLab: Determine base_commit from the MR API instead of querying the commits [@leipert](https://github.com/leipert)
+
+## 5.6.7
+
+* Fix `--no-ansi` behavior for decoloring output [@otaznik-net](https://github.com/otaznik-net)
+
+## 5.6.6
+
+* Adds `failure` as an alias to `fail` without incurring the wrath of default rubocop [@orta](https://github.com/orta)
+
+## 5.6.5
+
+* Update the git gem so that Danger handles multi-byte chars correctly [@tbrand](https://github.com/tbrand)
+
+## 5.6.4
+
+* Update Bitrise CI to parse repo_slug with two slashes [@dstranz](https://github.com/dstranz)
+
+## 5.6.3
+
 * Fix to detect not Pull Request on CircleCI. [@kompiro](https://github.com/kompiro)
+* Add support for two slashes in repository slug like `organisation/team/repository` (for GitLab) [@dstranz](https://github.com/dstranz)
 
 ## 5.6.2
 
-* Update Screwdriver CI to parse repo_slug/repo_url correctly. [@fandyfyf](https://github.com/fandyfyf) 
+* Update Screwdriver CI to parse repo_slug/repo_url correctly. [@fandyfyf](https://github.com/fandyfyf)
 
 ## 5.6.1
 
